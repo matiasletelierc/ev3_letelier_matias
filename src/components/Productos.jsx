@@ -12,6 +12,7 @@ import {
   Tooltip,
   Chip,
   Stack,
+  Divider,
 } from "@mui/material";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import { useNavigate } from "react-router-dom";
@@ -100,26 +101,28 @@ const Productos = () => {
 
   return (
     <Box my={6}>
-      <Typography variant="h4" align="center" gutterBottom color="primary">
+      <Typography variant="h4" align="center" gutterBottom color="primary" sx={{ fontWeight: 700 }}>
         Productos
       </Typography>
-      <Grid container spacing={4} justifyContent="center" sx={{ mb: 6 }}>
+      <Divider sx={{ mb: 4, mx: "auto", width: 120, borderColor: "primary.main" }} />
+      <Grid container spacing={4} justifyContent="center" sx={{ mb: 8 }}>
         {productos.map((prod) => (
-          <Grid item key={prod.id} xs={12} sm={6} md={4}>
+          <Grid key={prod.id} sx={{ width: "100%", maxWidth: 340, mx: "auto" }}>
             <Card
               sx={{
-                borderRadius: 4,
+                borderRadius: 5,
                 boxShadow: 6,
                 transition: "transform 0.2s, box-shadow 0.2s",
                 "&:hover": {
-                  transform: "translateY(-6px) scale(1.03)",
-                  boxShadow: 12,
+                  transform: "translateY(-8px) scale(1.03)",
+                  boxShadow: 16,
                 },
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                bgcolor: "#fff",
+                bgcolor: "#fafbfc",
+                border: "1px solid #f0f0f0",
               }}
             >
               <CardMedia
@@ -130,16 +133,17 @@ const Productos = () => {
                 loading="lazy"
                 sx={{
                   objectFit: "cover",
-                  borderTopLeftRadius: 16,
-                  borderTopRightRadius: 16,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
                   background: "#eee",
+                  borderBottom: "1px solid #f0f0f0",
                 }}
               />
-              <CardContent>
-                <Typography variant="h6" color="primary" gutterBottom>
+              <CardContent sx={{ pb: 1.5 }}>
+                <Typography variant="h6" color="primary" gutterBottom sx={{ fontWeight: 600, fontSize: "1.15rem" }}>
                   {prod.nombre}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ minHeight: 48 }}>
+                <Typography variant="body2" color="text.secondary" sx={{ minHeight: 48, mb: 1 }}>
                   {prod.descripcion}
                 </Typography>
                 <Stack direction="row" spacing={1} sx={{ mt: 1, flexWrap: "wrap" }}>
@@ -149,7 +153,12 @@ const Productos = () => {
                   {prod.colores.length > 0 && (
                     <Chip label={`Colores: ${prod.colores.join(", ")}`} size="small" color="success" />
                   )}
-                  <Chip label={`$${prod.precio.toLocaleString()}`} size="small" color="warning" />
+                  <Chip
+                    label={`$${prod.precio.toLocaleString()}`}
+                    size="small"
+                    color="warning"
+                    sx={{ fontWeight: 700 }}
+                  />
                 </Stack>
               </CardContent>
               <CardActions sx={{ p: 2, pt: 0 }}>
@@ -165,6 +174,9 @@ const Productos = () => {
                       borderRadius: 2,
                       boxShadow: 2,
                       textTransform: "none",
+                      fontSize: "1rem",
+                      py: 1,
+                      letterSpacing: 0.5,
                     }}
                     onClick={() =>
                       navigate(`/contact?producto=${encodeURIComponent(prod.nombre)}`)
@@ -179,26 +191,28 @@ const Productos = () => {
         ))}
       </Grid>
 
-      <Typography variant="h4" align="center" gutterBottom color="primary">
+      <Typography variant="h4" align="center" gutterBottom color="primary" sx={{ fontWeight: 700 }}>
         Talleres y Servicios
       </Typography>
+      <Divider sx={{ mb: 4, mx: "auto", width: 180, borderColor: "primary.main" }} />
       <Grid container spacing={4} justifyContent="center">
         {servicios.map((serv) => (
-          <Grid item key={serv.id} xs={12} sm={6} md={4}>
+          <Grid key={serv.id} sx={{ width: "100%", maxWidth: 340, mx: "auto" }}>
             <Card
               sx={{
-                borderRadius: 4,
+                borderRadius: 5,
                 boxShadow: 6,
                 transition: "transform 0.2s, box-shadow 0.2s",
                 "&:hover": {
-                  transform: "translateY(-6px) scale(1.03)",
-                  boxShadow: 12,
+                  transform: "translateY(-8px) scale(1.03)",
+                  boxShadow: 16,
                 },
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                bgcolor: "#fff",
+                bgcolor: "#fafbfc",
+                border: "1px solid #f0f0f0",
               }}
             >
               <CardMedia
@@ -209,19 +223,20 @@ const Productos = () => {
                 loading="lazy"
                 sx={{
                   objectFit: "cover",
-                  borderTopLeftRadius: 16,
-                  borderTopRightRadius: 16,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
                   background: "#eee",
+                  borderBottom: "1px solid #f0f0f0",
                 }}
               />
-              <CardContent>
-                <Typography variant="h6" color="primary" gutterBottom>
+              <CardContent sx={{ pb: 1.5 }}>
+                <Typography variant="h6" color="primary" gutterBottom sx={{ fontWeight: 600, fontSize: "1.15rem" }}>
                   {serv.nombre}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ minHeight: 48 }}>
-                  {serv.ubicacion && `Ubicación: ${serv.ubicacion}`}
-                  {serv.fecha && <><br />Fecha: {serv.fecha}</>}
-                  {serv.cupos && <><br />Cupos: {serv.cupos}</>}
+                <Typography variant="body2" color="text.secondary" sx={{ minHeight: 48, mb: 1 }}>
+                  {serv.ubicacion && <><b>Ubicación:</b> {serv.ubicacion}<br /></>}
+                  {serv.fecha && <><b>Fecha:</b> {serv.fecha}<br /></>}
+                  {serv.cupos && <><b>Cupos:</b> {serv.cupos}</>}
                 </Typography>
               </CardContent>
               <CardActions sx={{ p: 2, pt: 0 }}>
@@ -237,6 +252,9 @@ const Productos = () => {
                       borderRadius: 2,
                       boxShadow: 2,
                       textTransform: "none",
+                      fontSize: "1rem",
+                      py: 1,
+                      letterSpacing: 0.5,
                     }}
                     onClick={() =>
                       navigate(`/contact?producto=${encodeURIComponent(serv.nombre)}`)
